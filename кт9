@@ -1,0 +1,121 @@
+#Строк строка
+from appium import webdriver
+import time
+
+desired_caps = {
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "app": "path_to_youtube_apk_file"
+}
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
+search_box = driver.find_element_by_id("search-box")
+search_box.send_keys("cats")
+search_box.submit()
+
+time.sleep(2)
+driver.quit()
+
+
+
+#Работа видео
+from appium import webdriver
+import time
+
+desired_caps = {
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "app": "path_to_youtube_apk_file"
+}
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
+first_video = driver.find_element_by_xpath("//div[@id='search-results']//a")
+first_video.click()
+
+time.sleep(5)  
+
+
+#Добваление в плей лист
+from appium import webdriver
+import time
+
+desired_caps = {
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "app": "path_to_youtube_apk_file"
+}
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
+first_video = driver.find_element_by_xpath("//div[@id='search-results']//a")
+first_video.click()
+
+time.sleep(2)  
+
+add_to_playlist_button = driver.find_element_by_xpath("//button[@id='add-to-playlist']")
+add_to_playlist_button.click()
+
+time.sleep(2)  
+
+driver.back()  
+
+time.sleep(2)  
+
+playlist_tab = driver.find_element_by_xpath("//a[@href='/playlist']")
+playlist_tab.click()
+
+time.sleep(2)  
+
+
+assert "Added video" in driver.page_source
+
+time.sleep(2)  
+
+driver.quit()
+
+#Тест на прокрудку страницы
+from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+import time
+
+desired_caps = {
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "app": "path_to_youtube_apk_file"
+}
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
+while True:
+    # Прокручиваем страницу вниз до самого конца
+    driver.swipe(start_x=500, start_y=1500, end_x=500, end_y=100, duration=1000)
+    time.sleep(2)  # Пауза для загрузки контента
+
+    # Проверяем, достигнут ли конец страницы
+    end_of_page = driver.find_element_by_xpath("//div[@id='end-of-page']")
+    if end_of_page.is_displayed():
+        break
+
+time.sleep(2)
+driver.quit()
+
+#Тест на рекомендавции
+from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+import time
+
+desired_caps = {
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "app": "path_to_youtube_apk_file"
+}
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
+action = TouchAction(driver)
+action.press(x=500, y=500).move_to(x=500, y=300).release().perform()
+time.sleep(2)
+
+driver.quit()
